@@ -52,7 +52,7 @@
             <span class="author-block">
               <a href="https://heye0507.github.io/">Hao He</a><sup>*1,2</sup>,</span>
             <span class="author-block">
-              <a href="https://yixunliang.github.io/">Yixun Liang</a><sup>*2</sup>,</span>
+              <a href="https://yixunliang.github.io/">Yixun Liang</a><sup>*1</sup>,</span>
             <span class="author-block">
               <a href="https://wileewang.github.io/">Luozhou Wang</a><sup>2</sup>,</span>
             <span class="author-block">
@@ -183,7 +183,7 @@
 <div class="columns is-centered has-text-centered">
   <div class="column is-four-fifths">
     <h2 class="title is-3">Method Overview</h2>
-    <img src="./imgs/model_v5_crop.pdf" class="center" width="1000px">
+    <img src="./imgs/model_v5_crop.pdf" type="application/pdf" class="center" width="1000px">
     <div class="content has-text-justified">
       <p style="max-width: 1000px; margin: 0 auto;"> 
         Pipeline Overview of LucidFusion. Our framework processes a set of sparse, unposed multi-view images as input. These images are concatenated along the width dimension and passed through the Stable Diffusion model in a feedforward manner. The model predicts the RCM representation for the input images. Additionally, the feature map from the final layer of the VAE is fed into a decoder network to predict Gaussian parameters. The RCM representation and the predicted Gaussian parameters are then fused and passed to the Gaussian renderer to generate novel views for supervision.

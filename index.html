@@ -147,11 +147,10 @@
 
 <div class="columns is-centered has-text-centered">
   <div class="column is-four-fifths">
-    <img src="./imgs/teaser.png" class="center" width="1000px">
+    <img src="./imgs/output_16.gif" class="center" width="1000px">
     <div class="columns is-centered has-text-centered">
       <p style="max-width: 1000px;">
-      FlexGen is a flexible framework designed to generate high-quality, consistent  multi-view images conditioned on a single-view image,
-      or a text prompt, or both. Our method allows editing of unseen regions and modification of material properties through user-defined text.
+      We present a flexible end-to-end feed-forward framework, named the *LucidFusion*, to generate high-resolution 3D Gaussians from unposed, sparse, and arbitrary numbers of multiview images.
       </p>
     </div>
   </div>
@@ -167,16 +166,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-          In this work, we introduce FlexGen, a flexible framework designed to generate controllable and consistent multi-view images, 
-          conditioned on a single-view image, or a text prompt, or both. FlexGen tackles the challenges of controllable multi-view synthesis 
-          through additional conditioning on 3D-aware text annotations. We utilize the strong reasoning capabilities of GPT-4V to generate
-          3D-aware text annotations. By analyzing four orthogonal views of an object arranged as tiled multi-view images, GPT-4V can produce 
-          text annotations that include 3D-aware information with spatial relationship. By integrating the control signal with proposed adaptive 
-          dual-control module, our model can generate multi-view images that correspond to the specified text. FlexGen supports multiple 
-          controllable capabilities, allowing users to modify text prompts to generate reasonable and corresponding unseen parts. Additionally, 
-          users can influence attributes such as appearance and material properties, including metallic and roughness. Extensive experiments 
-          demonstrate that our approach offers enhanced multiple controllability, marking a significant advancement over existing multi-view diffusion models. 
-          This work has substantial implications for fields requiring rapid and flexible 3D content creation, including game development, animation, and virtual reality.
+          Recent large reconstruction models have made notable progress in generating high-quality 3D objects from single images. However, these methods often struggle with controllability, as they lack information from multiple views, leading to incomplete or inconsistent 3D reconstructions. To address this limitation, we introduce LucidFusion, a flexible end-to-end feed-forward framework that leverages the Relative Coordinate Map (RCM).  Unlike traditional methods linking images to 3D world thorough pose, LucidFusion utilizes RCM to align geometric features coherently across different views, making it highly adaptable for 3D generation from arbitrary, unposed images. Furthermore, LucidFusion seamlessly integrates with the original single-image-to-3D pipeline, producing detailed 3D Gaussians at a resolution of $512 \times 512$, making it well-suited for a wide range of applications.
           </p>
         </div>
       </div>
@@ -193,15 +183,10 @@
 <div class="columns is-centered has-text-centered">
   <div class="column is-four-fifths">
     <h2 class="title is-3">Method Overview</h2>
-    <img src="./imgs/framework.png" class="center" width="1000px">
+    <img src="./imgs/model_v5_crop.png" class="center" width="1000px">
     <div class="content has-text-justified">
       <p style="max-width: 1000px; margin: 0 auto;"> 
-        Overview of the framework. FlexGen is a flexible framework to generate controllable
-        and consistent multi-view images, conditioned on a single-view image, or a text prompt, or both.
-        The system incorporates a 3D-aware annotation method using GPT-4V and an adaptive dual-control
-        module that integrates both a reference input image and text prompts for precise joint control. The
-        condition switcher enhances flexibility, enabling the model to generate multi-view images based on
-        image input, text input, or a combination of both modalities.
+        Pipeline Overview of LucidFusion. Our framework processes a set of sparse, unposed multi-view images as input. These images are concatenated along the width dimension and passed through the Stable Diffusion model in a feedforward manner. The model predicts the RCM representation for the input images. Additionally, the feature map from the final layer of the VAE is fed into a decoder network to predict Gaussian parameters. The RCM representation and the predicted Gaussian parameters are then fused and passed to the Gaussian renderer to generate novel views for supervision.
       </p>
     </div>
   </div>
@@ -211,74 +196,23 @@
 
 <div class="columns is-centered has-text-centered">
   <div class="column is-four-fifths">
-    <h2 class="title is-4">3D-aware caption generation pipeline</h2>
-    <img src="./imgs/caption.png" class="center" width="1000px">
+    <h2 class="title is-4">Cross-dataset Results</h2>
+    <img src="./imgs/ours_qualitative.jpeg" class="center" width="1000px">
     <div class="content has-text-justified">
       <p style="max-width: 1000px; margin: 0 auto;"> 
-      A 3D object is rendered into four orthogonal multi-view images (front, left, back, right) in a 2×2 grid layout. Using GPT-4V, the agent generates
-      both global and local descriptions. The global description captures the overall attributes of the object
-      and the 3D spatial relationships between its components, while local features detail specific aspects
-      such as color, posture, and texture, thereby enriching the dataset with rich semantic annotations.
+      Examples of cross-dataset content creations with our framework, the *LucidFusion*, around **~13FPS** on A800.
       </p>
     </div>
   </div>
 </div>
 
-
-
-<div class="columns is-centered has-text-centered">
-  <div class="column is-four-fifths">
-    <h2 class="title is-3">Text to multi-view</h2>
-    <img src="./imgs/text-to-multi.png" class="center" width="1000px">
-    <div class="columns is-centered has-text-centered">
-
-    </div>
-  </div>
-</div>
-
 <br>
-
-
-<div class="columns is-centered has-text-centered">
-  <div class="column is-four-fifths">
-    <h2 class="title is-3">Effect of the caption</h2>
-    <img src="./imgs/ablation_prompt.png" class="center" width="1000px">
-    <div class="columns is-centered has-text-centered">
-
-    </div>
-  </div>
-</div>
-
-<br>
-
-
-
-
-<div class="columns is-centered has-text-centered">
-  <div class="column is-four-fifths">
-    <h2 class="title is-3">More cases</h2>
-    <img src="./imgs/more_cases.png" class="center" width="1000px">
-    <div class="columns is-centered has-text-centered">
-
-    </div>
-  </div>
-</div>
-
-<br>
-
-
-
-
 
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@article{xu2024flexgen, 
-	author = {Xinli Xu and Wenhang Ge and Jiantao Lin and Jiawei Feng and Lie Xu and HanFeng Zhao and Shunsi Zhang and Ying-Cong Chen}, 
-	title = {FlexGen: Flexible Multi-View Generation from Text and Image Inputs}, 
-        journal={arXiv preprint},
-	year = {2024}, 
+    <pre><code>@article{TODO, 
 }</code></pre>
   </div>
 </section>

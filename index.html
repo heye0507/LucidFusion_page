@@ -6,7 +6,7 @@
         content="LucidFusion: Generating 3D Gaussians with Arbitrary Unposed Images"> -->
   <meta name="keywords" content="LucidFusion">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LucidFusion: Generating 3D Gaussians with Arbitrary Unposed Images</title>
+  <title>LucidFusion: Reconstructing 3D Gaussians with Arbitrary Unposed Images</title>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
   <script>
@@ -69,7 +69,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">LucidFusion: Generating 3D Gaussians with Arbitrary Unposed Images</h1>
+          <h1 class="title is-1 publication-title">LucidFusion: Reconstructing 3D Gaussians with Arbitrary Unposed Images</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://heye0507.github.io/">Hao He</a><sup>*1,2</sup>,</span>
@@ -498,7 +498,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-          Recent large reconstruction models have made notable progress in generating high-quality 3D objects from single images. However, these methods often struggle with controllability, as they lack information from multiple views, leading to incomplete or inconsistent 3D reconstructions. To address this limitation, we introduce LucidFusion, a flexible end-to-end feed-forward framework that leverages the Relative Coordinate Map (RCM).  Unlike traditional methods linking images to 3D world thorough pose, LucidFusion utilizes RCM to align geometric features coherently across different views, making it highly adaptable for 3D generation from arbitrary, unposed images. Furthermore, LucidFusion seamlessly integrates with the original single-image-to-3D pipeline, producing detailed 3D Gaussians at a resolution of 512x512, making it well-suited for a wide range of applications.
+         Recent large reconstruction models have made notable progress in generating high-quality 3D objects from single images. However, current reconstruction methods often rely on explicit camera pose estimation or fixed viewpoints, restricting their flexibility and practical applicability. We reformulate 3D reconstruction as image-to-image translation and introduce the Relative Coordinate Map (RCM), which aligns multiple unposed images to a “main” view without pose estimation. While RCM simplifies the process, its lack of global 3D supervision can yield noisy outputs. To address this, we propose Relative Coordinate Gaussians (RCG) as an extension to RCM, which treats each pixel’s coordinates as a Gaussian center and employs differentiable rasterization for consistent geometry and pose recovery. Our LucidFusion framework handles an arbitrary number of unposed inputs, producing robust 3D reconstructions within seconds and paving the way for more flexible, pose-free 3D pipelines.
           </p>
         </div>
       </div>
